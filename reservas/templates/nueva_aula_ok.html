@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %} Nueva Aula Creada {% endblock %}
+
+{% block content %}
+<h4>Nueva Aula Creada Correctamente</h4>
+
+<p>Nombre: {{ aula.nombre }}</p>
+<p>Plazas: {{aula.plazas }}</p>
+<p>Tipo de Pizarrón: {{aula.tipo_pizarra }}</p>
+<p>Tipo de Aula: {{aula.tipo_aula }}</p>
+<p>Ubicacion: {{aula.ubicacion }}</p>
+{% endblock %}

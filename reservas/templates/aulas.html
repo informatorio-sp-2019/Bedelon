@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %} Listado de aulas ({{total}}){% endblock %}
+{% block content %}
+
+
+	{% for aula in aulas %}
+
+		<a href="/aulas/{{aula.id}}">
+			<h3>
+				{{aula.nombre}}
+			</h3>
+		</a>			
+	{% endfor %}
+
+
+{% endblock %}

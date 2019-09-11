@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %} Búsqueda {% endblock %}
+
+{% block content %}
+	<form action="/aulas/{{id}}/" method="post">
+		{% csrf_token %}
+		{{ form }}
+
+		<input type="submit" value="Ir">
+	</form>
+{% endblock %}
