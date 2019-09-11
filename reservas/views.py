@@ -1,6 +1,5 @@
-from django.shortcuts import render
-from reservas.models import Aula, Reserva
 from django.shortcuts import render, redirect
+from reservas.models import Aula, Reserva
 from reservas.forms import LoginForm, SearchForm, AulaForm
 from django.contrib.auth import authenticate, login as login_django, logout as logout_django
 from django.http import HttpResponseRedirect
@@ -20,7 +19,7 @@ def home(request):
 
 def login(request):
 
-	if request.user.is_authenticated:
+	if request.user.is_authenticated:		
 		return HttpResponseRedirect(reverse('reservas:home'))
 
 	if request.method == 'POST':
