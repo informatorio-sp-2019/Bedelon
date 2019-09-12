@@ -3,15 +3,23 @@
 {% block title %} Listado de aulas ({{total}}){% endblock %}
 {% block content %}
 
+<div class="container">
+		<h1>Aula Disponible</h1>
+    <div class="row center">
+        {% for aula in aulas %}
+            <a href="#">
+							<div class="col s3 grey z-depth-1 aula"><h3>{{aula.nombre}}</h3>
+	            <div class="datos_aula">
+	                <span>Aula=Nombre</span>
+	                <span>Aula=34</span>
+	                <span>Tipo: Pizarra Verde</span>
+	                <span>Pupitres</span>
+	                <span>Piso 1 Pasillo Sur</span>
+	            </div>
+						</div></a>
 
-	{% for aula in aulas %}
-
-		<a href="/aulas/{{aula.id}}">
-			<h3>
-				{{aula.nombre}}
-			</h3>
-		</a>			
-	{% endfor %}
-
+        {% endfor %}
+    </div>
+</div>
 
 {% endblock %}
