@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from reservas.models import Aula, Reserva
-from reservas.forms import LoginForm, SearchForm, AulaForm
+from reservas.forms import LoginForm, SearchForm, AulaForm, FeriadoForm
 from django.contrib.auth import authenticate, login as login_django, logout as logout_django
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -19,7 +19,7 @@ def home(request):
 
 def login(request):
 
-	if request.user.is_authenticated:		
+	if request.user.is_authenticated:
 		return HttpResponseRedirect(reverse('reservas:home'))
 
 	if request.method == 'POST':
@@ -30,7 +30,7 @@ def login(request):
 		if user is not None:
 			login_django(request, user)
 			return HttpResponseRedirect(reverse('reservas:home'))
-	
+
 	form = LoginForm()
 
 	context = {'form': form}
@@ -65,3 +65,13 @@ def nuevaaula(request):
 	else:
 		form = AulaForm()
 		return render(request, 'nueva_aula.html',{'form':form})
+
+def feriado(request):
+	if request.method == 'POST':
+		form = FeriadoForm(request.POST)
+		if form.is_valid():
+			feriado = form.save()
+			return render (request, 'agregar_feriado_ok.html',{'feriado':feriado})
+	else:
+		form = FeriadoForm()
+		return render (request, 'agregar_feriado.html',{'form':form}) 
