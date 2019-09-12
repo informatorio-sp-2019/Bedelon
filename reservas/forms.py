@@ -1,5 +1,6 @@
 from django import forms
-from reservas.models import Aula
+from reservas.models import Aula, Feriado
+
 
 
 class LoginForm(forms.Form):
@@ -15,3 +16,7 @@ class AulaForm(forms.ModelForm):
 	class Meta:
 		model = Aula
 		fields = ('nombre', 'plazas', 'tipo_pizarra', 'tipo_aula', 'ubicacion')
+class FeriadoForm(forms.ModelForm):
+	class Meta:
+		model = Feriado
+		fields = ('fecha', 'descripcion')
