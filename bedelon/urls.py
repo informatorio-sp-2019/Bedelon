@@ -24,5 +24,6 @@ urlpatterns = [
     path('reservas/', include(('reservas.urls', 'reservas'))),
     path('aulas/<int:id>/', views.fechas_reservas, name= 'fechas_reservas'),
     path('nuevaaula/', views.nuevaaula, name='nuevaaula'),
-    path('feriados/', views.feriado, name='feriado'),
+    path('feriados/', views.feriadito, name='feriado'),
+    path('docentes/',views.docente, name='docente'),
 ]

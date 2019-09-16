@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from reservas.models import Aula, Reserva
-from reservas.forms import LoginForm, SearchForm, AulaForm, FeriadoForm
+from reservas.forms import LoginForm, SearchForm, AulaForm, FeriadoForm, DocenteForm
 from django.contrib.auth import authenticate, login as login_django, logout as logout_django
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -61,17 +61,33 @@ def nuevaaula(request):
 		form = AulaForm(request.POST)
 		if form.is_valid():
 			aula = form.save()
-			return render(request, 'nueva_aula_ok.html',{'aula':aula})
+#			return render(request, 'nueva_aula_ok.html',{'aula':aula})
+			return redirect('aulas')
 	else:
 		form = AulaForm()
 		return render(request, 'nueva_aula.html',{'form':form})
 
-def feriado(request):
+#Amigos mios queridos, si les salta un error al ingresar un feriado
+
+def feriadito(request):
 	if request.method == 'POST':
 		form = FeriadoForm(request.POST)
 		if form.is_valid():
 			feriado = form.save()
-			return render (request, 'agregar_feriado_ok.html',{'feriado':feriado})
+#			return render(request, 'agregar_feriado_ok.html',{'feriado':feriado})
+			return redirect('aulas')
 	else:
 		form = FeriadoForm()
-		return render (request, 'agregar_feriado.html',{'form':form}) 
+		return render(request, 'agregar_feriado.html',{'form':form})
+
+def docente(request):
+	if request.method == 'POST':
+		form = DocenteForm(request.POST)
+		if form.is_valid():
+			docente = form.save()
+#			return redirect('agregar_docente_ok.html',{'docente':docente})
+			return redirect('aulas')
+
+	else:
+		form = DocenteForm()
+		return render (request, 'agregar_docente.html',{'form':form})
