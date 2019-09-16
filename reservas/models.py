@@ -38,3 +38,6 @@ class Reserva(models.Model):
 class Feriado(models.Model):
 	fecha = models.DateField()
 	descripcion = models.CharField(max_length=300)
+
+	def __str__(self):
+		return "{0}, {1}".format(self.fecha, self.descripcion)

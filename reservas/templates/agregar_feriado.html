@@ -4,7 +4,7 @@
 
 {% block content %}
 <form action="/feriados/" method="POST">
-
+    
     {% csrf_token %}
     {{ form.as_p}}
     <input type="submit" value="Agregar Feriado"/>
