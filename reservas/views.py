@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from reservas.models import Aula, Reserva
-from reservas.forms import LoginForm, SearchForm, AulaForm, FeriadoForm, DocenteForm
+from reservas.forms import LoginForm, SearchForm, AulaForm, FeriadoForm, DocenteForm, BedelForm
 from django.contrib.auth import authenticate, login as login_django, logout as logout_django
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -84,10 +84,30 @@ def docente(request):
 	if request.method == 'POST':
 		form = DocenteForm(request.POST)
 		if form.is_valid():
-			docente = form.save()
-#			return redirect('agregar_docente_ok.html',{'docente':docente})
+			_docente = form.save(commit=False)
+			_docente.set_password(_docente.password)
+			_docente.save()
+
 			return redirect('aulas')
 
 	else:
 		form = DocenteForm()
-		return render (request, 'agregar_docente.html',{'form':form})
+		return render(request, 'agregar_docente.html',{'form':form})
+
+
+def bedel(request):
+	if request.method == 'POST':
+		form = BedelForm(request.POST)
+		if form.is_valid():
+			_bedel = form.save(commit=False)
+			_bedel.set_password(_bedel.password)
+			_bedel.save()
+
+			return redirect('aulas')
+		
+	form = BedelForm()
+	template = 'agregar_bedel.html'
+	contexto =  {'form':form}
+	return render(request, template,contexto)
+
+
