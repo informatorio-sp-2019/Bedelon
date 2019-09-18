@@ -1,1 +1,18 @@
-Bienvenido {{ user.username }}
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %} HOME {% endblock %}
+
+{% block nav %}
+	{% if tipo == 'DOCENTE' %}
+		{% include 'nav_docente.html' %}	
+	{% else %}
+		{% include 'nav_bedel.html' %}	
+	{% endif %}
+
+{% endblock %}
+
+{% block content %}
+	USUARIO {{ user.username }}
+	PERMISO {{ tipo }}
+{% endblock %}

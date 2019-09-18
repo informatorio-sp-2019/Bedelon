@@ -13,8 +13,23 @@ def aulas(request):
 	return render(request, 'aulas.html', {'aulas': aulas, 'total': total})
 
 def home(request):
+	
+	try:
+		oUsuario = request.user.docente
+		tipo = 'DOCENTE'
+	except:	
+		try:
+			oUsuario = request.user.bedel
+			tipo = 'BEDEL'
+		except:
+			oUsuario = request.user
+			tipo = 'SUPERUSUARIO'
+	finally:
+		pass
+
 	template = 'home.html'
-	return render(request, template)
+	context = {'usuario':oUsuario,'tipo':tipo}
+	return render(request, template,context)
 
 
 def login(request):
@@ -29,6 +44,8 @@ def login(request):
 
 		if user is not None:
 			login_django(request, user)
+			# import ipdb
+			# ipdb.set_trace()		
 			return HttpResponseRedirect(reverse('reservas:home'))
 
 	form = LoginForm()
