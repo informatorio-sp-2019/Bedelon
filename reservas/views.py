@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from reservas.models import Aula, Reserva
+from reservas.models import Aula, Reserva, Feriado
 from reservas.forms import LoginForm, SearchForm, AulaForm, FeriadoForm, DocenteForm, BedelForm
 from django.contrib.auth import authenticate, login as login_django, logout as logout_django
 from django.http import HttpResponseRedirect
@@ -87,6 +87,8 @@ def nuevaaula(request):
 #Amigos mios queridos, si les salta un error al ingresar un feriado
 
 def feriadito(request):
+	feriados = Feriado.objects.all().order_by('fecha')
+
 	if request.method == 'POST':
 		form = FeriadoForm(request.POST)
 		if form.is_valid():
@@ -95,7 +97,7 @@ def feriadito(request):
 			return redirect('aulas')
 	else:
 		form = FeriadoForm()
-		return render(request, 'agregar_feriado.html',{'form':form})
+		return render(request, 'agregar_feriado.html',{'form':form, 'feriados':feriados})
 
 def docente(request):
 	if request.method == 'POST':
